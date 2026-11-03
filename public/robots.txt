@@ -1,0 +1,5 @@
+User-agent: *
+Allow: /
+
+# TODO: actualizar con el dominio definitivo
+Sitemap: https://charly-supplies.vercel.app/sitemap.xml
