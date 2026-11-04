@@ -53,7 +53,6 @@
 
 .promo {
   display: inline-flex;
-  flex-wrap: wrap;
   align-items: center;
   gap: 0.5rem 0.85rem;
   padding: 0.5rem 1rem 0.5rem 0.5rem;
@@ -76,6 +75,7 @@
 }
 
 .promo__etiqueta {
+  flex: none;
   padding: 0.3rem 0.6rem;
   border-radius: var(--radio-sm);
   background: var(--rojo);
@@ -88,6 +88,7 @@
 
 .promo__texto {
   font-weight: 600;
+  line-height: 1.3;
 
   strong {
     font-family: var(--font-display);
@@ -113,7 +114,7 @@
   margin-inline: auto;
 }
 
-/* Disco con resplandor rojo (degradado CSS detrás del logo transparente; el logo no se filtra) */
+/* Disco de marca (el resplandor es un degradado CSS; el logo no se filtra) */
 .placa {
   position: relative;
   display: grid;
@@ -121,17 +122,56 @@
   width: 100%;
   aspect-ratio: 1;
   border-radius: 50%;
-  background:
-    radial-gradient(closest-side, rgb(228 0 0 / 0.55), rgb(212 0 0 / 0.18) 62%, transparent 100%),
-    radial-gradient(closest-side, var(--carbon-2), var(--negro));
+  isolation: isolate;
+  background: radial-gradient(closest-side, var(--carbon-2), var(--negro));
   box-shadow:
     inset 0 0 0 1px rgb(243 236 223 / 0.14),
     0 0 0 0.75rem var(--negro),
     0 0 0 calc(0.75rem + 1px) rgb(243 236 223 / 0.12);
 }
 
+.placa__brillo {
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  border-radius: 50%;
+  background: radial-gradient(
+    closest-side,
+    rgb(228 0 0 / 0.6),
+    rgb(212 0 0 / 0.2) 60%,
+    transparent 100%
+  );
+}
+
+.anillo {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  overflow: visible;
+
+  text {
+    fill: rgb(243 236 223 / 0.5);
+    font-family: var(--font-text);
+    font-size: 7.5px;
+    font-weight: 600;
+  }
+}
+
+.placa__capa {
+  display: grid;
+  place-items: center;
+  width: 100%;
+}
+
 .placa__logo {
-  width: 92%;
+  width: 80%;
+}
+
+.destellos {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
 }
 
 .destello {
@@ -162,6 +202,15 @@
   opacity: 0.7;
 }
 
+.destello--d {
+  bottom: 4%;
+  right: 18%;
+  width: 0.9rem;
+  height: 0.9rem;
+  color: var(--rojo-claro);
+  opacity: 0.85;
+}
+
 /* ——— Cinta de categorías ——— */
 .cinta {
   overflow: hidden;
@@ -175,7 +224,8 @@
   align-items: center;
   gap: 1.25rem;
   width: max-content;
-  padding-block: 0.8rem;
+  /* Igual al gap: así las dos mitades miden lo mismo y el bucle no salta */
+  padding: 0.8rem 1.25rem 0.8rem 0;
   font-family: var(--font-display);
   font-size: clamp(1.25rem, 3vw, 1.75rem);
   line-height: 1;
@@ -188,7 +238,7 @@
   }
 }
 
-/* ——— Entrada ——— */
+/* ——— Movimiento (solo sin "reducir movimiento") ——— */
 @media (prefers-reduced-motion: no-preference) {
   .entra {
     animation: entrada-arriba 560ms var(--ease-out) both;
@@ -199,7 +249,45 @@
     animation: entrada-escala 800ms var(--ease-out) 120ms both;
   }
 
+  /* El resplandor late despacio, como una brasa */
+  .placa__brillo {
+    animation: respirar 4.8s ease-in-out infinite alternate;
+  }
+
+  /* El anillo de texto da una vuelta cada 50 s */
+  .anillo {
+    animation: girar 50s linear infinite;
+  }
+
+  /* El logo flota apenas */
+  .placa__logo {
+    animation: flotar 6s ease-in-out infinite alternate;
+  }
+
+  /* Los destellos entran y luego titilan, cada uno a su ritmo */
   .destello {
-    animation: entrada-escala 600ms var(--ease-out) 420ms both;
+    animation:
+      entrada-escala 600ms var(--ease-out) 420ms both,
+      titilar 3.2s ease-in-out 1.1s infinite;
+  }
+  .destello--b {
+    animation-duration: 600ms, 4.1s;
+    animation-delay: 480ms, 1.6s;
+  }
+  .destello--c {
+    animation-duration: 600ms, 2.7s;
+    animation-delay: 540ms, 0.9s;
+  }
+  .destello--d {
+    animation-duration: 600ms, 3.6s;
+    animation-delay: 600ms, 2.2s;
+  }
+
+  /* La cinta avanza de forma continua; se pausa al pasar el cursor */
+  .cinta__pista {
+    animation: desplazar 60s linear infinite;
+  }
+  .cinta:hover .cinta__pista {
+    animation-play-state: paused;
   }
 }

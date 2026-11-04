@@ -48,16 +48,37 @@
 
     <div class="visual">
       <div class="placa">
-        <app-brand-logo
-          class="placa__logo"
-          variante="transparente"
-          sizes="(min-width: 900px) 42vw, 88vw"
-          [prioritario]="true"
-        />
+        <!-- Resplandor que "respira" (degradado CSS; el logo no lleva filtros) -->
+        <div class="placa__brillo" aria-hidden="true"></div>
+
+        <!-- Anillo de texto que gira lentamente -->
+        <svg class="anillo" viewBox="0 0 200 200" aria-hidden="true" focusable="false">
+          <defs>
+            <path id="hero-anillo" d="M 100,100 m -90,0 a 90,90 0 1,1 180,0 a 90,90 0 1,1 -180,0" />
+          </defs>
+          <text>
+            <textPath href="#hero-anillo" textLength="564" lengthAdjust="spacing">
+              ENCENDEDORES ✦ PIPAS ✦ ACCESORIOS ✦ ENCENDEDORES ✦ PIPAS ✦ ACCESORIOS ✦
+            </textPath>
+          </text>
+        </svg>
+
+        <div #capaLogo class="placa__capa">
+          <app-brand-logo
+            class="placa__logo"
+            variante="transparente"
+            sizes="(min-width: 900px) 40vw, 82vw"
+            [prioritario]="true"
+          />
+        </div>
       </div>
-      <app-icon class="destello destello--a" nombre="destello" />
-      <app-icon class="destello destello--b" nombre="destello" />
-      <app-icon class="destello destello--c" nombre="destello" />
+
+      <div #capaDestellos class="destellos" aria-hidden="true">
+        <app-icon class="destello destello--a" nombre="destello" />
+        <app-icon class="destello destello--b" nombre="destello" />
+        <app-icon class="destello destello--c" nombre="destello" />
+        <app-icon class="destello destello--d" nombre="destello" />
+      </div>
     </div>
   </div>
 
