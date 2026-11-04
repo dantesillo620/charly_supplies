@@ -1,5 +1,12 @@
 import { Routes } from '@angular/router';
 import { SeoData } from './core/seo/seo.service';
+import { seoProducto, tituloProducto } from './pages/producto/producto.seo';
+import { PRECIO_ENCENDEDORES } from './catalog/catalog.data';
+
+const promo =
+  PRECIO_ENCENDEDORES.promocion != null
+    ? ` Encendedores en promoción a $${PRECIO_ENCENDEDORES.promocion}.`
+    : '';
 
 /**
  * Cada ruta define `title` y `data.seo`; SeoTitleStrategy los convierte en
@@ -12,8 +19,7 @@ export const routes: Routes = [
     loadComponent: () => import('./pages/home/home'),
     data: {
       seo: {
-        description:
-          'Charly Supplies: encendedores, pipas y accesorios con estilo urbano. Explora el catálogo y consulta precio y disponibilidad por WhatsApp.',
+        description: `Charly Supplies: encendedores y accesorios con estilo urbano.${promo} Pide por WhatsApp y acordamos el envío.`,
       } satisfies SeoData,
     },
   },
@@ -23,10 +29,16 @@ export const routes: Routes = [
     loadComponent: () => import('./pages/catalogo/catalogo'),
     data: {
       seo: {
-        description:
-          'Catálogo de Charly Supplies: encendedores, pipas y otros accesorios. Busca por nombre, filtra por categoría y consulta por WhatsApp.',
+        description: `Catálogo de Charly Supplies: encendedores y accesorios.${promo} Busca por diseño y pide por WhatsApp.`,
       } satisfies SeoData,
     },
+  },
+  {
+    // Página de cada producto: es el enlace que va en el mensaje de WhatsApp.
+    path: 'catalogo/:id',
+    title: tituloProducto,
+    loadComponent: () => import('./pages/producto/producto'),
+    resolve: { seo: seoProducto },
   },
   {
     path: 'contacto',
@@ -35,7 +47,7 @@ export const routes: Routes = [
     data: {
       seo: {
         description:
-          'Contacta a Charly Supplies por WhatsApp para consultar productos, precios y disponibilidad. Horario de atención de lunes a viernes.',
+          'Contacta a Charly Supplies por WhatsApp para pedir productos y acordar el envío. Atención de lunes a domingo, de 9:00 a. m. a 9:00 p. m.',
       } satisfies SeoData,
     },
   },

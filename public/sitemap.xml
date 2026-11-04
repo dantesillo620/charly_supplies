@@ -1,7 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- TODO: actualizar el dominio y agregar aquí cada ruta pública nueva -->
+<!-- TODO: cambiar el dominio cuando exista el definitivo. Agrega aquí cada página nueva
+     (incluidos los productos: /catalogo/<id>). -->
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url><loc>https://charly-supplies.vercel.app/</loc></url>
   <url><loc>https://charly-supplies.vercel.app/catalogo</loc></url>
   <url><loc>https://charly-supplies.vercel.app/contacto</loc></url>
+  <url><loc>https://charly-supplies.vercel.app/catalogo/enc-001</loc></url>
+  <url><loc>https://charly-supplies.vercel.app/catalogo/enc-002</loc></url>
+  <url><loc>https://charly-supplies.vercel.app/catalogo/enc-003</loc></url>
+  <url><loc>https://charly-supplies.vercel.app/catalogo/enc-004</loc></url>
+  <url><loc>https://charly-supplies.vercel.app/catalogo/enc-005</loc></url>
+  <url><loc>https://charly-supplies.vercel.app/catalogo/enc-006</loc></url>
+  <url><loc>https://charly-supplies.vercel.app/catalogo/enc-007</loc></url>
+  <url><loc>https://charly-supplies.vercel.app/catalogo/enc-008</loc></url>
 </urlset>

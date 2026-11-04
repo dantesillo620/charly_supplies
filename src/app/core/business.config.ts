@@ -1,12 +1,9 @@
 /**
  * Datos de contacto del negocio. ÚNICO lugar a editar cuando cambien.
  *
- * ⚠️ El teléfono y el horario se transcribieron de la referencia comercial
- * inicial: confírmalos con el negocio antes de publicar.
- *
- * Los campos `null` no se muestran en el sitio. Para publicar la dirección o
- * Instagram basta con reemplazar `null` por el objeto correspondiente
- * (hay ejemplos comentados abajo).
+ * Los campos `null` (o listas vacías) no se muestran en el sitio. Para
+ * publicar la dirección basta con reemplazar `null` por el objeto
+ * correspondiente (hay un ejemplo comentado abajo).
  */
 
 export interface HorarioAtencion {
@@ -34,6 +31,20 @@ export interface InstagramNegocio {
   url: string;
 }
 
+export interface FacebookNegocio {
+  url: string;
+}
+
+export interface EnvioNegocio {
+  /** Texto visible sobre cómo se acuerda el envío. */
+  texto: string;
+  /**
+   * Zonas de entrega a mostrar (p. ej. ['Guadalajara', 'Zapopan', 'Tlaquepaque']).
+   * Vacío = no se muestra ninguna zona.
+   */
+  zonas: string[];
+}
+
 export interface NegocioConfig {
   nombre: string;
   telefono: {
@@ -49,6 +60,8 @@ export interface NegocioConfig {
   horarioSchema: string[];
   direccion: DireccionNegocio | null;
   instagram: InstagramNegocio | null;
+  facebook: FacebookNegocio | null;
+  envio: EnvioNegocio;
 }
 
 export const NEGOCIO: NegocioConfig = {
@@ -58,8 +71,8 @@ export const NEGOCIO: NegocioConfig = {
     enlace: '+523320700734',
   },
   whatsapp: '523320700734',
-  horario: [{ dias: 'Lunes a viernes', horas: '9:00 a. m. – 6:00 p. m.' }],
-  horarioSchema: ['Mo-Fr 09:00-18:00'],
+  horario: [{ dias: 'Lunes a domingo', horas: '9:00 a. m. – 9:00 p. m.' }],
+  horarioSchema: ['Mo-Su 09:00-21:00'],
 
   // Pendiente. Ejemplo:
   // direccion: {
@@ -69,7 +82,12 @@ export const NEGOCIO: NegocioConfig = {
   // },
   direccion: null,
 
-  // Pendiente. No usar una cuenta que no haya confirmado el negocio. Ejemplo:
-  // instagram: { usuario: 'usuario_real', url: 'https://www.instagram.com/usuario_real/' },
-  instagram: null,
+  instagram: { usuario: 'charly_supplies', url: 'https://www.instagram.com/charly_supplies/' },
+  facebook: { url: 'https://www.facebook.com/share/19xLtMZP5T/' },
+
+  envio: {
+    texto:
+      'El costo de envío depende de tu ubicación: lo acordamos por WhatsApp antes de cerrar tu pedido.',
+    zonas: [],
+  },
 };

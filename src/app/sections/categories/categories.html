@@ -15,7 +15,12 @@
             <span class="fila__num" aria-hidden="true">0{{ i + 1 }}</span>
             <app-icon class="fila__icono" [nombre]="c.id" />
             <span class="fila__texto">
-              <span class="fila__nombre">{{ c.nombre }}</span>
+              <span class="fila__nombre">
+                {{ c.nombre }}
+                @if (c.proximamente) {
+                  <span class="fila__pronto">Próximamente</span>
+                }
+              </span>
               <span class="fila__resumen">{{ c.resumen }}</span>
             </span>
             <span class="fila__flecha" aria-hidden="true"><app-icon nombre="flecha" /></span>

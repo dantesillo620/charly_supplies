@@ -1,4 +1,4 @@
-import { SITE } from '../site.config';
+import { SITE, urlAbsoluta, urlSitio } from '../site.config';
 
 /** Quita propiedades vacías ('', [] o undefined) para no publicar datos incompletos. */
 function compact(obj: Record<string, unknown>): Record<string, unknown> {
@@ -18,8 +18,8 @@ export function buildBusinessSchema(): object {
     '@context': 'https://schema.org',
     '@type': business.type,
     name: SITE.name,
-    url: SITE.url,
-    image: SITE.url + SITE.defaultImage,
+    url: urlSitio(),
+    image: urlAbsoluta(SITE.defaultImage),
     description: SITE.defaultDescription,
     telephone: business.telephone,
     email: business.email,

@@ -30,14 +30,9 @@ import { ProductDialog } from '../product-dialog/product-dialog';
       padding: 0;
       list-style: none;
     }
-    /* Pocas tarjetas (destacados): ocupan todo el ancho sin columnas vacías */
+    /* Pocas tarjetas (destacados, relacionados): ocupan el ancho sin columnas vacías */
     .rejilla--ajustada {
-      grid-template-columns: repeat(auto-fit, minmax(min(100%, 15.5rem), 1fr));
-    }
-    @media (min-width: 1200px) {
-      .rejilla--ajustada {
-        grid-template-columns: repeat(auto-fit, minmax(17rem, 22rem));
-      }
+      grid-template-columns: repeat(auto-fit, minmax(min(100%, 14rem), 1fr));
     }
     li > * {
       height: 100%;

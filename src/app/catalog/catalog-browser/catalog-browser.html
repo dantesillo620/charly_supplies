@@ -41,7 +41,8 @@
           [attr.aria-pressed]="categoria() === c.id"
           (click)="elegirCategoria(c.id)"
         >
-          {{ c.nombre }} <span class="filtro__n">{{ conteo().get(c.id) ?? 0 }}</span>
+          {{ c.nombre }}
+          <span class="filtro__n">{{ conteo().get(c.id) ?? 'Pronto' }}</span>
         </button>
       }
     </div>
@@ -65,11 +66,15 @@
         @if (busqueda()) {
           No encontramos “{{ busqueda() }}”
         } @else {
-          Aún no hay productos en esta categoría
+          Muy pronto agregaremos productos aquí
         }
       </p>
       <p class="vacio__texto">
-        Prueba con otro nombre o categoría. Si buscas algo en particular, escríbenos.
+        @if (busqueda()) {
+          Prueba con otro nombre o categoría. Si buscas algo en particular, escríbenos.
+        } @else {
+          Mientras tanto, pregúntanos por WhatsApp qué tenemos disponible.
+        }
       </p>
       <div class="vacio__acciones">
         <button type="button" class="btn btn--contorno" (click)="limpiar(campo)">

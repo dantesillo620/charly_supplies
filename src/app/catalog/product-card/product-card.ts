@@ -1,13 +1,14 @@
 import { ChangeDetectionStrategy, Component, computed, input, output } from '@angular/core';
-import { mensajeProducto, enlaceWhatsApp } from '../../core/whatsapp';
+import { enlaceWhatsAppProducto } from '../../core/whatsapp';
 import { Icon } from '../../shared/icon';
-import { nombreCategoria, textoPrecio } from '../catalog.data';
+import { nombreCategoria } from '../catalog.data';
 import { Producto } from '../catalog.models';
 import { ProductMedia } from '../product-media/product-media';
+import { ProductPrice } from '../product-price/product-price';
 
 @Component({
   selector: 'app-product-card',
-  imports: [ProductMedia, Icon],
+  imports: [ProductMedia, ProductPrice, Icon],
   changeDetection: ChangeDetectionStrategy.OnPush,
   templateUrl: './product-card.html',
   styleUrl: './product-card.scss',
@@ -18,9 +19,5 @@ export class ProductCard {
   readonly verDetalle = output<HTMLElement>();
 
   protected readonly categoria = computed(() => nombreCategoria(this.producto().categoria));
-  protected readonly precio = computed(() => textoPrecio(this.producto()));
-  protected readonly whatsapp = computed(() => {
-    const p = this.producto();
-    return enlaceWhatsApp(mensajeProducto(p.nombre, p.id));
-  });
+  protected readonly whatsapp = computed(() => enlaceWhatsAppProducto(this.producto()));
 }

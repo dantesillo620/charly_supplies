@@ -27,7 +27,7 @@
               {
                 "glob": "**/*",
                 "input": "public",
-                "ignore": ["brand/*.png", "**/.DS_Store", "**/.gitkeep"]
+                "ignore": ["brand/*.png", "images/productos/*.png", "**/.DS_Store", "**/.gitkeep"]
               }
             ],
             "styles": ["src/styles.scss"],

@@ -15,20 +15,20 @@
         {{ p.nombre }}<span class="sr-only">, ver detalle</span>
       </button>
     </h3>
-    <p class="tarjeta__precio">{{ precio() }}</p>
+    <app-product-price class="tarjeta__precio" [producto]="p" />
 
     <div class="tarjeta__acciones">
       @if (p.esEjemplo) {
-        <span class="tarjeta__nota">Consulta no disponible en fichas de ejemplo</span>
+        <span class="tarjeta__nota">Ficha de ejemplo, no disponible para pedir</span>
       } @else {
         <a
           class="btn btn--rojo btn--sm tarjeta__consultar"
           [href]="whatsapp()"
           target="_blank"
           rel="noopener"
-          [attr.aria-label]="'Consultar ' + p.nombre + ' por WhatsApp'"
+          [attr.aria-label]="'Pedir ' + p.nombre + ' por WhatsApp'"
         >
-          <app-icon nombre="chat" /> Consultar
+          <app-icon nombre="chat" /> Pedir
         </a>
       }
       <span class="tarjeta__ver" aria-hidden="true">

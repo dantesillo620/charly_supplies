@@ -51,6 +51,59 @@
   color: var(--texto-suave);
 }
 
+.promo {
+  display: inline-flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.5rem 0.85rem;
+  padding: 0.5rem 1rem 0.5rem 0.5rem;
+  border: 2px dashed var(--rojo-claro);
+  border-radius: var(--radio);
+  text-decoration: none;
+  transition:
+    border-color 180ms ease,
+    transform 160ms var(--ease-out);
+
+  &:active {
+    transform: scale(0.98);
+  }
+
+  @media (hover: hover) and (pointer: fine) {
+    &:hover {
+      border-color: var(--marfil);
+    }
+  }
+}
+
+.promo__etiqueta {
+  padding: 0.3rem 0.6rem;
+  border-radius: var(--radio-sm);
+  background: var(--rojo);
+  color: var(--blanco);
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+.promo__texto {
+  font-weight: 600;
+
+  strong {
+    font-family: var(--font-display);
+    font-weight: 400;
+    font-size: 1.5rem;
+    line-height: 1;
+    color: var(--marfil);
+  }
+
+  del {
+    margin-left: 0.25rem;
+    color: var(--texto-suave);
+    text-decoration-color: var(--rojo-claro);
+  }
+}
+
 /* ——— Composición de marca ——— */
 .visual {
   position: relative;

@@ -6,7 +6,7 @@
         variante="blancoNegro"
         sizes="(min-width: 900px) 260px, 220px"
       />
-      <p class="footer__lema">Encendedores, pipas y accesorios. Consultas por WhatsApp.</p>
+      <p class="footer__lema">Encendedores y accesorios. Pedidos por WhatsApp.</p>
     </div>
 
     <nav class="footer__col" aria-label="Pie de página">
@@ -41,12 +41,19 @@
             </a>
           </li>
         }
+        @if (negocio.facebook; as fb) {
+          <li>
+            <a class="enlace-pie" [href]="fb.url" target="_blank" rel="noopener">
+              <app-icon nombre="facebook" /> Facebook
+            </a>
+          </li>
+        }
       </ul>
     </div>
   </div>
 
   <div class="contenedor footer__base">
     <p>© {{ anio }} {{ negocio.nombre }}</p>
-    <p>Precios y disponibilidad se confirman por WhatsApp.</p>
+    <p>El costo de envío se acuerda por WhatsApp.</p>
   </div>
 </footer>

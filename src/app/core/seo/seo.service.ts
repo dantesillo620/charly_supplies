@@ -1,6 +1,6 @@
 import { DOCUMENT, Injectable, inject } from '@angular/core';
 import { Meta, Title } from '@angular/platform-browser';
-import { SITE } from '../site.config';
+import { SITE, urlAbsoluta } from '../site.config';
 
 /** Datos SEO que puede declarar cada ruta en `data.seo`. */
 export interface SeoData {
@@ -27,8 +27,8 @@ export class SeoService {
   /** Aplica título, descripción, canonical, Open Graph y Twitter Card. */
   update(pageTitle: string, path: string, seo: SeoData = {}): void {
     const description = seo.description ?? SITE.defaultDescription;
-    const url = this.absoluteUrl(path);
-    const image = this.absoluteUrl(seo.image ?? SITE.defaultImage);
+    const url = urlAbsoluta(path);
+    const image = urlAbsoluta(seo.image ?? SITE.defaultImage);
     // Sin imagen propia se usa la de la marca (1200×630).
     const dims = seo.image
       ? { w: seo.imageWidth, h: seo.imageHeight, alt: seo.imageAlt }
@@ -92,11 +92,5 @@ export class SeoService {
       this.document.head.appendChild(link);
     }
     link.href = url;
-  }
-
-  private absoluteUrl(path: string): string {
-    if (/^https?:\/\//.test(path)) return path;
-    const clean = path.split(/[?#]/)[0];
-    return SITE.url + (clean.startsWith('/') ? clean : `/${clean}`);
   }
 }

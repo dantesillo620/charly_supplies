@@ -15,8 +15,8 @@
         <h2 id="contacto-titulo" class="titulo-seccion">Pregunta por lo que buscas</h2>
       }
       <p class="texto-grande">
-        Escríbenos por WhatsApp para consultar productos, precios y disponibilidad. Te respondemos
-        en nuestro horario de atención.
+        Escríbenos por WhatsApp para pedir tu producto o resolver dudas. Te respondemos en nuestro
+        horario de atención.
       </p>
 
       <dl class="datos">
@@ -42,6 +42,15 @@
             <dd>{{ h.dias }}, {{ h.horas }}</dd>
           }
         </div>
+        <div class="dato">
+          <dt><app-icon nombre="ubicacion" /> Envíos</dt>
+          <dd class="dato__texto">
+            {{ negocio.envio.texto }}
+            @if (negocio.envio.zonas.length) {
+              <br />Entregas en: {{ negocio.envio.zonas.join(', ') }}.
+            }
+          </dd>
+        </div>
         @if (negocio.direccion; as dir) {
           <div class="dato">
             <dt><app-icon nombre="ubicacion" /> Dirección</dt>
@@ -63,6 +72,14 @@
               <a class="enlace" [href]="ig.url" target="_blank" rel="noopener">{{
                 '@' + ig.usuario
               }}</a>
+            </dd>
+          </div>
+        }
+        @if (negocio.facebook; as fb) {
+          <div class="dato">
+            <dt><app-icon nombre="facebook" /> Facebook</dt>
+            <dd>
+              <a class="enlace" [href]="fb.url" target="_blank" rel="noopener">Charly Supplies</a>
             </dd>
           </div>
         }

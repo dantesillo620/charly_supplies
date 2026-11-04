@@ -10,9 +10,25 @@
       </h1>
 
       <p class="texto-grande entra" style="--d: 2">
-        Encendedores, pipas y otros accesorios con estilo urbano. Explora el catálogo y escríbenos
-        por WhatsApp para conocer precio y disponibilidad.
+        Encendedores y accesorios con estilo urbano. Elige tu diseño en el catálogo y pídelo por
+        WhatsApp: ahí confirmamos disponibilidad y acordamos el envío.
       </p>
+
+      @if (promo; as pr) {
+        <a
+          class="promo entra"
+          style="--d: 3"
+          routerLink="/catalogo"
+          [queryParams]="{ categoria: 'encendedores' }"
+        >
+          <span class="promo__etiqueta">Promoción</span>
+          <span class="promo__texto">
+            Encendedores a <strong>{{ pr.ahora }}</strong>
+            <del><span class="sr-only">antes </span>{{ pr.antes }}</del>
+          </span>
+          <app-icon nombre="flecha" />
+        </a>
+      }
 
       <div class="acciones entra" style="--d: 3">
         <a class="btn btn--rojo" routerLink="/catalogo">

@@ -19,21 +19,28 @@ se genera como HTML estático con su SEO ya incluido.
 
 | Qué | Dónde |
 |---|---|
-| Teléfono, WhatsApp, horario, dirección, Instagram | `src/app/core/business.config.ts` |
+| Teléfono, WhatsApp, horario, dirección, redes, envíos | `src/app/core/business.config.ts` |
 | Mensajes de WhatsApp | `src/app/core/whatsapp.ts` |
-| Productos, categorías y **modo demostración** | `src/app/catalog/catalog.data.ts` |
+| Productos, categorías, **precio/promoción de encendedores**, modo demostración | `src/app/catalog/catalog.data.ts` |
 | Logos (variantes y tamaños) | `src/app/core/brand.ts` · archivos en `public/brand/web/` |
 
-- **Dirección / Instagram:** están en `null` y no se muestran. Reemplázalos por el objeto de
-  ejemplo comentado en `business.config.ts` y aparecerán en contacto, pie de página y JSON-LD.
-- **Productos reales:** guarda las fotos en `public/images/productos/` (WebP o JPG, de
-  preferencia cuadradas o 4:5, ~1200 px) y agrega cada producto a `PRODUCTOS` con la plantilla
-  comentada. La primera imagen es la portada; con dos o más se activa la galería del detalle.
-  Sin `precio` se muestra «Consultar precio».
-- **Quitar las fichas de ejemplo:** `MODO_DEMOSTRACION = false` en `catalog.data.ts`.
-- **Fotos del local:** `public/images/tienda/` (reservada para uso futuro).
-- Los logos originales de `public/brand/*.png` no se publican (ver `ignore` en `angular.json`);
-  el sitio usa las copias optimizadas de `public/brand/web/`.
+- **Agregar un producto:** guarda la foto en `public/images/productos/` y ejecuta
+  `scripts/optimizar-foto.sh "public/images/productos/Mi foto.png" enc-009` (macOS, requiere
+  `brew install webp`). Luego copia una ficha en `PRODUCTOS` con `foto('enc-009', 'descripción')`.
+  Cada producto tiene su página `/catalogo/<id>`; agrégala también a `public/sitemap.xml`.
+- **Promoción:** `PRECIO_ENCENDEDORES` en `catalog.data.ts`. Con `promocion: null` se muestra
+  solo el precio regular.
+- **Pedido por WhatsApp:** el mensaje incluye producto, referencia, precio y el enlace a su
+  página; WhatsApp muestra la foto como vista previa. El envío se acuerda en el chat.
+- **Zonas de entrega:** `envio.zonas` en `business.config.ts` (vacío = no se muestran).
+- Las fotos originales (`public/images/productos/*.png`) y los logos originales no se publican
+  (ver `ignore` en `angular.json`); el sitio usa las versiones de las carpetas `web/`.
+
+## Dominio
+
+`urlSitio()` en `src/app/core/site.config.ts` toma el dominio automáticamente: en Vercel usa
+`VERCEL_PROJECT_PRODUCTION_URL` al compilar y en el navegador el dominio actual. Al compilar
+para Hostinger, cambia `SITE.url` al dominio definitivo y actualiza `robots.txt` y `sitemap.xml`.
 
 ## SEO
 

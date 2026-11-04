@@ -16,7 +16,11 @@ import { ProductGrid } from '../product-grid/product-grid';
 
 /** Quita acentos y mayúsculas para que "encendedor" encuentre "Encendédor". */
 function normalizar(texto: string): string {
-  return texto.normalize('NFD').replace(/[\u0300-\u036f]/g, '').toLowerCase().trim();
+  return texto
+    .normalize('NFD')
+    .replace(/[\u0300-\u036f]/g, '')
+    .toLowerCase()
+    .trim();
 }
 
 @Component({

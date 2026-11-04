@@ -15,6 +15,7 @@ import { Icon } from '../../shared/icon';
     @if (imagen(); as img) {
       <img
         [src]="img.src"
+        [attr.srcset]="img.srcset ?? null"
         [alt]="img.alt"
         [attr.width]="img.ancho ?? 1200"
         [attr.height]="img.alto ?? 1200"
@@ -37,5 +38,5 @@ export class ProductMedia {
   readonly categoria = input.required<CategoriaId>();
   readonly etiquetaMarcador = input('Fotografía pendiente');
   readonly prioritaria = input(false);
-  readonly sizes = input('(min-width: 1200px) 25vw, (min-width: 640px) 45vw, 90vw');
+  readonly sizes = input('(min-width: 1200px) 300px, (min-width: 640px) 45vw, 92vw');
 }

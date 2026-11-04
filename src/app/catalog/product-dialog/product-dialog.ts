@@ -3,17 +3,14 @@ import {
   Component,
   ElementRef,
   afterRenderEffect,
-  computed,
   input,
   linkedSignal,
   output,
   viewChild,
 } from '@angular/core';
-import { WHATSAPP_GENERAL, enlaceWhatsApp, mensajeProducto } from '../../core/whatsapp';
 import { Icon } from '../../shared/icon';
-import { nombreCategoria, textoPrecio } from '../catalog.data';
 import { Producto } from '../catalog.models';
-import { ProductMedia } from '../product-media/product-media';
+import { ProductDetail } from '../product-detail/product-detail';
 
 /**
  * Detalle de producto en un <dialog> nativo con showModal(): el navegador
@@ -22,9 +19,27 @@ import { ProductMedia } from '../product-media/product-media';
  */
 @Component({
   selector: 'app-product-dialog',
-  imports: [ProductMedia, Icon],
+  imports: [ProductDetail, Icon],
   changeDetection: ChangeDetectionStrategy.OnPush,
-  templateUrl: './product-dialog.html',
+  template: `
+    <dialog
+      #dialogo
+      class="dialogo"
+      aria-labelledby="detalle-titulo"
+      (close)="cerrado.emit()"
+      (click)="alClicFondo($event)"
+    >
+      @if (actual(); as p) {
+        <div class="caja">
+          <button type="button" class="cerrar" (click)="cerrar()" autofocus>
+            <app-icon nombre="cerrar" />
+            <span class="sr-only">Cerrar detalle</span>
+          </button>
+          <app-product-detail [producto]="p" tituloId="detalle-titulo" [enlacePagina]="true" />
+        </div>
+      }
+    </dialog>
+  `,
   styleUrl: './product-dialog.scss',
 })
 export class ProductDialog {
@@ -38,24 +53,6 @@ export class ProductDialog {
     source: this.producto,
     computation: (p, previo) => p ?? previo?.value ?? null,
   });
-  /** Foto visible; vuelve a la primera al cambiar de producto. */
-  protected readonly indice = linkedSignal({ source: this.producto, computation: () => 0 });
-
-  protected readonly imagenes = computed(() => this.actual()?.imagenes ?? []);
-  protected readonly imagenActual = computed(() => this.imagenes()[this.indice()]);
-  protected readonly categoria = computed(() => {
-    const p = this.actual();
-    return p ? nombreCategoria(p.categoria) : '';
-  });
-  protected readonly precio = computed(() => {
-    const p = this.actual();
-    return p ? textoPrecio(p) : '';
-  });
-  protected readonly whatsappProducto = computed(() => {
-    const p = this.actual();
-    return p ? enlaceWhatsApp(mensajeProducto(p.nombre, p.id)) : WHATSAPP_GENERAL;
-  });
-  protected readonly whatsappGeneral = WHATSAPP_GENERAL;
 
   constructor() {
     // Después de renderizar el contenido, para que el foco inicial (autofocus) lo encuentre.
@@ -74,10 +71,5 @@ export class ProductDialog {
   /** Clic en el fondo (fuera de la caja) cierra el detalle. */
   protected alClicFondo(evento: MouseEvent): void {
     if (evento.target === this.dialogo().nativeElement) this.cerrar();
-  }
-
-  protected mover(paso: number): void {
-    const total = this.imagenes().length;
-    if (total > 1) this.indice.update((i) => (i + paso + total) % total);
   }
 }
