@@ -2,6 +2,6 @@
 <!-- TODO: actualizar el dominio y agregar aquí cada ruta pública nueva -->
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url><loc>https://charly-supplies.vercel.app/</loc></url>
-  <url><loc>https://charly-supplies.vercel.app/productos</loc></url>
+  <url><loc>https://charly-supplies.vercel.app/catalogo</loc></url>
   <url><loc>https://charly-supplies.vercel.app/contacto</loc></url>
 </urlset>

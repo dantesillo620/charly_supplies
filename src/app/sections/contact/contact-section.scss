@@ -1,0 +1,78 @@
+.rejilla {
+  display: grid;
+  gap: clamp(2.5rem, 6vw, 5rem);
+
+  @media (min-width: 900px) {
+    grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.1fr);
+    align-items: center;
+  }
+}
+
+.marca {
+  padding-right: 0.75rem;
+  padding-bottom: 0.75rem;
+}
+
+/* Placa blanca = mismo fondo del archivo; sombra sólida roja de estilo etiqueta retro */
+.placa {
+  max-width: 32rem;
+  padding: clamp(0.75rem, 2vw, 1.25rem);
+  border: 2px solid var(--tinta);
+  border-radius: var(--radio);
+  background: var(--papel-logo);
+  box-shadow: 0.75rem 0.75rem 0 var(--rojo);
+}
+
+.info {
+  display: grid;
+  gap: 1.25rem;
+  justify-items: start;
+}
+
+.datos {
+  display: grid;
+  width: 100%;
+  margin: 0.5rem 0 0;
+  border-top: 1px solid var(--linea);
+}
+
+.dato {
+  display: grid;
+  gap: 0.15rem;
+  padding-block: 0.9rem;
+  border-bottom: 1px solid var(--linea);
+
+  @media (min-width: 560px) {
+    grid-template-columns: 10rem 1fr;
+    align-items: center;
+  }
+
+  dt {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 0.75rem;
+    font-weight: 700;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--texto-suave);
+  }
+
+  dd {
+    margin: 0;
+    font-size: 1.0625rem;
+    font-weight: 600;
+  }
+}
+
+.acciones {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  margin-top: 0.5rem;
+}
+
+.nota {
+  font-size: 0.875rem;
+  color: var(--texto-suave);
+}

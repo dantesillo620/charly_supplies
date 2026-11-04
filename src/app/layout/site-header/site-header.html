@@ -1,0 +1,83 @@
+<header class="header superficie-oscura" [class.header--desplazado]="desplazado()">
+  <div class="contenedor barra">
+    <a class="brand" routerLink="/" (click)="cerrarMenu()">
+      <app-brand-logo variante="oficial" alt="" sizes="120px" [prioritario]="true" />
+      <span class="sr-only">Charly Supplies — Inicio</span>
+    </a>
+
+    <nav class="nav" aria-label="Principal">
+      <ul>
+        @for (item of nav; track item.ruta) {
+          <li>
+            <a
+              [routerLink]="item.ruta"
+              routerLinkActive="activo"
+              ariaCurrentWhenActive="page"
+              [routerLinkActiveOptions]="{ exact: item.exacto }"
+              >{{ item.etiqueta }}</a
+            >
+          </li>
+        }
+      </ul>
+    </nav>
+
+    <div class="acciones">
+      <a class="btn btn--rojo btn--sm cta" [href]="whatsapp" target="_blank" rel="noopener">
+        <app-icon nombre="chat" />
+        <span class="cta__texto">Consultar por WhatsApp</span>
+      </a>
+
+      <button
+        #toggle
+        class="toggle"
+        type="button"
+        aria-controls="menu-movil"
+        [attr.aria-expanded]="menuAbierto()"
+        (click)="alternarMenu()"
+      >
+        <app-icon [nombre]="menuAbierto() ? 'cerrar' : 'menu'" />
+        <span>{{ menuAbierto() ? 'Cerrar' : 'Menú' }}</span>
+      </button>
+    </div>
+  </div>
+
+  <div
+    id="menu-movil"
+    class="menu"
+    [class.menu--abierto]="menuAbierto()"
+    [attr.inert]="menuAbierto() ? null : ''"
+  >
+    <div class="contenedor menu__interior">
+      <nav aria-label="Principal, móvil">
+        <ul class="menu__lista">
+          @for (item of nav; track item.ruta; let i = $index) {
+            <li [style.--i]="i">
+              <a
+                [routerLink]="item.ruta"
+                routerLinkActive="activo"
+                ariaCurrentWhenActive="page"
+                [routerLinkActiveOptions]="{ exact: item.exacto }"
+                (click)="cerrarMenu()"
+              >
+                <span class="menu__num" aria-hidden="true">0{{ i + 1 }}</span>
+                {{ item.etiqueta }}
+              </a>
+            </li>
+          }
+        </ul>
+      </nav>
+      <a class="btn btn--rojo menu__cta" [href]="whatsapp" target="_blank" rel="noopener">
+        <app-icon nombre="chat" /> Consultar por WhatsApp
+      </a>
+      @for (h of horario; track h.dias) {
+        <p class="menu__horario">{{ h.dias }} · {{ h.horas }}</p>
+      }
+    </div>
+  </div>
+  <div
+    class="velo"
+    [class.velo--visible]="menuAbierto()"
+    (click)="cerrarMenu()"
+    aria-hidden="true"
+  ></div>
+</header>

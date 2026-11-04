@@ -1,18 +1,25 @@
 import { ChangeDetectionStrategy, Component, OnDestroy, inject } from '@angular/core';
-import { RouterLink } from '@angular/router';
 import { buildBusinessSchema } from '../../core/seo/business-schema';
 import { SeoService } from '../../core/seo/seo.service';
+import { Categories } from '../../sections/categories/categories';
+import { ContactSection } from '../../sections/contact/contact-section';
+import { Featured } from '../../sections/featured/featured';
+import { Hero } from '../../sections/hero/hero';
 
 @Component({
   selector: 'app-home',
-  imports: [RouterLink],
+  imports: [Hero, Categories, Featured, ContactSection],
   changeDetection: ChangeDetectionStrategy.OnPush,
   template: `
-    <section class="page">
-      <h1>Charly Supplies</h1>
-      <p>Productos e insumos de calidad.</p>
-      <a routerLink="/productos">Ver productos</a>
-    </section>
+    <app-hero />
+    <app-categories />
+    <!-- Se prerenderiza completo; su JavaScript se hidrata al acercarse a la pantalla -->
+    @defer (hydrate on viewport) {
+      <app-featured />
+    }
+    @defer (hydrate on viewport) {
+      <app-contact-section [enlaceCatalogo]="true" />
+    }
   `,
 })
 export default class Home implements OnDestroy {

@@ -1,0 +1,130 @@
+.cabecera {
+  display: grid;
+  gap: 1.25rem;
+  margin-bottom: clamp(2.5rem, 6vw, 4.5rem);
+
+  @media (min-width: 900px) {
+    grid-template-columns: 1fr 1fr;
+    align-items: end;
+    column-gap: 4rem;
+
+    .antetitulo {
+      grid-column: 1 / -1;
+    }
+    .texto-grande {
+      justify-self: end;
+    }
+  }
+}
+
+.lista {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  border-top: 2px solid var(--tinta);
+
+  li {
+    border-bottom: 2px solid var(--tinta);
+  }
+}
+
+.fila {
+  position: relative;
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  align-items: center;
+  gap: 1rem;
+  padding: clamp(1.25rem, 3vw, 2rem) 0.25rem;
+  text-decoration: none;
+  isolation: isolate;
+  transition: color 220ms ease;
+
+  @media (min-width: 720px) {
+    grid-template-columns: 3.5rem auto 1fr auto;
+    gap: 1.75rem;
+  }
+
+  /* Barrido rojo al pasar el cursor */
+  &::before {
+    content: '';
+    position: absolute;
+    inset: 0 -1rem;
+    z-index: -1;
+    background: var(--rojo);
+    clip-path: inset(0 100% 0 0);
+    transition: clip-path 320ms var(--ease-out);
+  }
+
+  &:focus-visible {
+    outline-offset: 4px;
+  }
+}
+
+.fila__num {
+  display: none;
+  font-size: 0.8125rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  color: var(--rojo-hondo);
+  transition: color 220ms ease;
+
+  @media (min-width: 720px) {
+    display: block;
+  }
+}
+
+.fila__icono {
+  width: clamp(2.5rem, 6vw, 3.5rem);
+  height: clamp(2.5rem, 6vw, 3.5rem);
+}
+
+.fila__texto {
+  display: grid;
+  gap: 0.35rem;
+
+  @media (min-width: 900px) {
+    grid-template-columns: minmax(0, 1.1fr) minmax(0, 1fr);
+    align-items: center;
+    gap: 2rem;
+  }
+}
+
+.fila__nombre {
+  font-family: var(--font-display);
+  font-size: clamp(2rem, 6.5vw, 4.25rem);
+  line-height: 0.95;
+  text-transform: uppercase;
+}
+
+.fila__resumen {
+  color: var(--texto-suave);
+  max-width: 26rem;
+  transition: color 220ms ease;
+}
+
+.fila__flecha {
+  display: grid;
+  place-items: center;
+  width: 3rem;
+  height: 3rem;
+  border: 2px solid currentColor;
+  border-radius: 50%;
+  transition: transform 260ms var(--ease-out);
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .fila:hover {
+    color: var(--blanco);
+
+    &::before {
+      clip-path: inset(0 0 0 0);
+    }
+    .fila__num,
+    .fila__resumen {
+      color: var(--blanco);
+    }
+    .fila__flecha {
+      transform: translateX(-0.5rem);
+    }
+  }
+}

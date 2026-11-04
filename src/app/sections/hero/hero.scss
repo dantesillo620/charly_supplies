@@ -1,0 +1,152 @@
+.hero {
+  position: relative;
+  overflow: hidden;
+}
+
+.rejilla {
+  display: grid;
+  gap: clamp(2.5rem, 6vw, 4rem);
+  padding-block: clamp(2.5rem, 7vw, 5.5rem) clamp(3rem, 7vw, 5.5rem);
+
+  @media (min-width: 900px) {
+    grid-template-columns: minmax(0, 1.2fr) minmax(0, 1fr);
+    align-items: center;
+    min-height: min(46rem, calc(100svh - var(--alto-header) - 4rem));
+  }
+}
+
+.texto {
+  display: grid;
+  gap: 1.5rem;
+  justify-items: start;
+}
+
+.titulo {
+  font-size: clamp(3rem, 12.5vw, 5.5rem);
+  text-wrap: balance;
+
+  @media (min-width: 900px) {
+    font-size: clamp(4.5rem, 7.4vw, 7rem);
+  }
+}
+
+/* Rojo vivo del logo: contraste 4.3:1 sobre negro en texto grande */
+.titulo__acento {
+  display: block;
+  color: var(--rojo-vivo);
+}
+
+.acciones {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  margin-top: 0.5rem;
+}
+
+.horario {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.875rem;
+  color: var(--texto-suave);
+}
+
+/* ——— Composición de marca ——— */
+.visual {
+  position: relative;
+  display: grid;
+  place-items: center;
+  width: min(100%, 34rem);
+  margin-inline: auto;
+}
+
+/* Disco con resplandor rojo (degradado CSS detrás del logo transparente; el logo no se filtra) */
+.placa {
+  position: relative;
+  display: grid;
+  place-items: center;
+  width: 100%;
+  aspect-ratio: 1;
+  border-radius: 50%;
+  background:
+    radial-gradient(closest-side, rgb(228 0 0 / 0.55), rgb(212 0 0 / 0.18) 62%, transparent 100%),
+    radial-gradient(closest-side, var(--carbon-2), var(--negro));
+  box-shadow:
+    inset 0 0 0 1px rgb(243 236 223 / 0.14),
+    0 0 0 0.75rem var(--negro),
+    0 0 0 calc(0.75rem + 1px) rgb(243 236 223 / 0.12);
+}
+
+.placa__logo {
+  width: 92%;
+}
+
+.destello {
+  position: absolute;
+  color: var(--marfil);
+}
+
+.destello--a {
+  top: 4%;
+  right: 8%;
+  width: 2.25rem;
+  height: 2.25rem;
+}
+
+.destello--b {
+  bottom: 10%;
+  left: 2%;
+  width: 1.25rem;
+  height: 1.25rem;
+  color: var(--rojo-claro);
+}
+
+.destello--c {
+  top: 18%;
+  left: 10%;
+  width: 0.75rem;
+  height: 0.75rem;
+  opacity: 0.7;
+}
+
+/* ——— Cinta de categorías ——— */
+.cinta {
+  overflow: hidden;
+  background: var(--rojo);
+  color: var(--blanco);
+  border-block: 2px solid var(--negro);
+}
+
+.cinta__pista {
+  display: flex;
+  align-items: center;
+  gap: 1.25rem;
+  width: max-content;
+  padding-block: 0.8rem;
+  font-family: var(--font-display);
+  font-size: clamp(1.25rem, 3vw, 1.75rem);
+  line-height: 1;
+  text-transform: uppercase;
+  white-space: nowrap;
+
+  app-icon {
+    width: 0.8em;
+    height: 0.8em;
+  }
+}
+
+/* ——— Entrada ——— */
+@media (prefers-reduced-motion: no-preference) {
+  .entra {
+    animation: entrada-arriba 560ms var(--ease-out) both;
+    animation-delay: calc(var(--d, 0) * 70ms);
+  }
+
+  .placa {
+    animation: entrada-escala 800ms var(--ease-out) 120ms both;
+  }
+
+  .destello {
+    animation: entrada-escala 600ms var(--ease-out) 420ms both;
+  }
+}

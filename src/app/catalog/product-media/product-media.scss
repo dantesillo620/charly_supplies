@@ -1,0 +1,55 @@
+:host {
+  position: relative;
+  display: block;
+  aspect-ratio: 4 / 5;
+  overflow: hidden;
+  background: var(--carbon);
+}
+
+img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.marcador {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  color: var(--marfil);
+  /* Trama sutil de líneas: textura de cartel, sin simular producto */
+  background:
+    radial-gradient(circle at 50% 46%, rgb(212 0 0 / 0.22), transparent 58%),
+    repeating-linear-gradient(-45deg, transparent 0 14px, rgb(243 236 223 / 0.035) 14px 15px),
+    var(--carbon);
+}
+
+.marcador__icono {
+  width: clamp(3.5rem, 30%, 6rem);
+  height: auto;
+  aspect-ratio: 1;
+  opacity: 0.9;
+}
+
+.marcador__destello {
+  position: absolute;
+  top: 12%;
+  right: 14%;
+  width: 0.9rem;
+  height: 0.9rem;
+  color: var(--rojo-claro);
+}
+
+.marcador__texto {
+  position: absolute;
+  bottom: 1rem;
+  left: 0;
+  right: 0;
+  text-align: center;
+  font-size: 0.6875rem;
+  font-weight: 600;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--gris-calido);
+}

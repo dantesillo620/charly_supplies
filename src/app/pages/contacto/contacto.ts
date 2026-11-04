@@ -1,13 +1,10 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
+import { ContactSection } from '../../sections/contact/contact-section';
 
 @Component({
   selector: 'app-contacto',
+  imports: [ContactSection],
   changeDetection: ChangeDetectionStrategy.OnPush,
-  template: `
-    <section class="page">
-      <h1>Contacto</h1>
-      <p>Escríbenos para cotizaciones y pedidos.</p>
-    </section>
-  `,
+  template: `<app-contact-section nivel="h1" [enlaceCatalogo]="true" />`,
 })
 export default class Contacto {}

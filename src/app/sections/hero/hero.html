@@ -1,0 +1,56 @@
+<section class="hero superficie-oscura" aria-labelledby="hero-titulo">
+  <div class="contenedor rejilla">
+    <div class="texto">
+      <p class="antetitulo antetitulo--rojo entra" style="--d: 0">
+        <app-icon nombre="destello" /> Encendedores · Pipas · Accesorios
+      </p>
+
+      <h1 id="hero-titulo" class="display titulo entra" style="--d: 1">
+        Accesorios <span class="titulo__acento">con personalidad</span>
+      </h1>
+
+      <p class="texto-grande entra" style="--d: 2">
+        Encendedores, pipas y otros accesorios con estilo urbano. Explora el catálogo y escríbenos
+        por WhatsApp para conocer precio y disponibilidad.
+      </p>
+
+      <div class="acciones entra" style="--d: 3">
+        <a class="btn btn--rojo" routerLink="/catalogo">
+          Explorar catálogo <app-icon nombre="flecha" />
+        </a>
+        <a class="btn btn--contorno" [href]="whatsapp" target="_blank" rel="noopener">
+          <app-icon nombre="chat" /> Escríbenos por WhatsApp
+        </a>
+      </div>
+
+      @for (h of horario; track h.dias) {
+        <p class="horario entra" style="--d: 4">
+          <app-icon nombre="reloj" /> {{ h.dias }} · {{ h.horas }}
+        </p>
+      }
+    </div>
+
+    <div class="visual">
+      <div class="placa">
+        <app-brand-logo
+          class="placa__logo"
+          variante="transparente"
+          sizes="(min-width: 900px) 42vw, 88vw"
+          [prioritario]="true"
+        />
+      </div>
+      <app-icon class="destello destello--a" nombre="destello" />
+      <app-icon class="destello destello--b" nombre="destello" />
+      <app-icon class="destello destello--c" nombre="destello" />
+    </div>
+  </div>
+
+  <div class="cinta" aria-hidden="true">
+    <p class="cinta__pista">
+      @for (item of cinta; track $index) {
+        <span>{{ item }}</span>
+        <app-icon nombre="destello" />
+      }
+    </p>
+  </div>
+</section>

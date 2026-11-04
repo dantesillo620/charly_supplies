@@ -1,5 +1,5 @@
 import { ApplicationConfig, provideBrowserGlobalErrorListeners } from '@angular/core';
-import { provideClientHydration, withEventReplay } from '@angular/platform-browser';
+import { provideClientHydration, withIncrementalHydration } from '@angular/platform-browser';
 import {
   TitleStrategy,
   provideRouter,
@@ -18,6 +18,7 @@ export const appConfig: ApplicationConfig = {
       withInMemoryScrolling({ scrollPositionRestoration: 'enabled', anchorScrolling: 'enabled' }),
     ),
     { provide: TitleStrategy, useClass: SeoTitleStrategy },
-    provideClientHydration(withEventReplay()),
+    // Incluye event replay; permite @defer (hydrate on viewport) en la portada.
+    provideClientHydration(withIncrementalHydration()),
   ],
 };

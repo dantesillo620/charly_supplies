@@ -1,20 +1,21 @@
-import { ChangeDetectionStrategy, Component } from '@angular/core';
-import { RouterLink, RouterLinkActive, RouterOutlet } from '@angular/router';
-import { SITE } from './core/site.config';
+import { ChangeDetectionStrategy, Component, DOCUMENT, inject } from '@angular/core';
+import { RouterOutlet } from '@angular/router';
+import { SiteFooter } from './layout/site-footer/site-footer';
+import { SiteHeader } from './layout/site-header/site-header';
 
 @Component({
   selector: 'app-root',
-  imports: [RouterOutlet, RouterLink, RouterLinkActive],
+  imports: [RouterOutlet, SiteHeader, SiteFooter],
   changeDetection: ChangeDetectionStrategy.OnPush,
   templateUrl: './app.html',
   styleUrl: './app.scss',
 })
 export class App {
-  protected readonly siteName = SITE.name;
-  protected readonly year = new Date().getFullYear();
-  protected readonly nav = [
-    { path: '/', label: 'Inicio', exact: true },
-    { path: '/productos', label: 'Productos', exact: false },
-    { path: '/contacto', label: 'Contacto', exact: false },
-  ];
+  private readonly document = inject(DOCUMENT);
+
+  /** Salto al contenido sin depender de href="#..." (que con <base href> volvería al inicio). */
+  protected saltarAlContenido(evento: Event): void {
+    evento.preventDefault();
+    this.document.getElementById('contenido')?.focus();
+  }
 }

@@ -1,0 +1,142 @@
+:host {
+  display: block;
+  height: 100%;
+}
+
+.tarjeta {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  border-radius: var(--radio);
+  overflow: hidden;
+  background: var(--blanco);
+  color: var(--tinta);
+  box-shadow: 0 0 0 1px rgb(21 18 17 / 0.1);
+  transition:
+    transform 260ms var(--ease-out),
+    box-shadow 260ms ease;
+
+  &:has(.tarjeta__abrir:focus-visible) {
+    outline: 3px solid var(--rojo-hondo);
+    outline-offset: 3px;
+  }
+}
+
+.tarjeta__media {
+  position: relative;
+  overflow: hidden;
+
+  app-product-media {
+    transition: transform 500ms var(--ease-out);
+  }
+}
+
+.tarjeta__etiqueta {
+  position: absolute;
+  top: 0.75rem;
+  left: 0.75rem;
+}
+
+.tarjeta__cuerpo {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  gap: 0.25rem;
+  padding: 1.1rem 1.1rem 1.2rem;
+}
+
+.tarjeta__categoria {
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--rojo-hondo);
+}
+
+.tarjeta__nombre {
+  font-family: var(--font-display);
+  font-weight: 400;
+  font-size: 1.5rem;
+  line-height: 1.05;
+  text-transform: uppercase;
+}
+
+.tarjeta__abrir {
+  padding: 0;
+  border: 0;
+  background: none;
+  text-align: left;
+  text-transform: inherit;
+  line-height: inherit;
+
+  &:focus-visible {
+    outline: none;
+  }
+
+  /* Área de clic de toda la tarjeta */
+  &::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    z-index: 1;
+  }
+}
+
+.tarjeta__precio {
+  font-weight: 600;
+  color: var(--tinta-suave);
+}
+
+.tarjeta__acciones {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.75rem;
+  margin-top: auto;
+  padding-top: 1rem;
+}
+
+/* El botón de consulta queda por encima del área de clic de la tarjeta */
+.tarjeta__consultar {
+  position: relative;
+  z-index: 2;
+}
+
+.tarjeta__nota {
+  font-size: 0.8125rem;
+  line-height: 1.35;
+  color: var(--tinta-suave);
+  max-width: 12rem;
+}
+
+.tarjeta__ver {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  font-size: 0.8125rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+
+  app-icon {
+    transition: transform 220ms var(--ease-out);
+  }
+}
+
+@media (hover: hover) and (pointer: fine) and (prefers-reduced-motion: no-preference) {
+  .tarjeta:hover {
+    transform: translateY(-4px);
+    box-shadow:
+      0 0 0 1px rgb(21 18 17 / 0.12),
+      0 18px 40px -18px rgb(21 18 17 / 0.45);
+
+    app-product-media {
+      transform: scale(1.03);
+    }
+    .tarjeta__ver app-icon {
+      transform: translateX(3px);
+    }
+  }
+}

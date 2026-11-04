@@ -1,0 +1,84 @@
+<section class="seccion superficie-clara" aria-labelledby="contacto-titulo">
+  <div class="contenedor rejilla">
+    <div class="marca" appReveal>
+      <!-- Variante sobre fondo blanco: se presenta en una placa blanca, como etiqueta -->
+      <div class="placa">
+        <app-brand-logo variante="rojoBlanco" sizes="(min-width: 900px) 34vw, 80vw" />
+      </div>
+    </div>
+
+    <div class="info" appReveal>
+      <p class="antetitulo antetitulo--rojo">Contacto</p>
+      @if (nivel() === 'h1') {
+        <h1 id="contacto-titulo" class="titulo-seccion">Pregunta por lo que buscas</h1>
+      } @else {
+        <h2 id="contacto-titulo" class="titulo-seccion">Pregunta por lo que buscas</h2>
+      }
+      <p class="texto-grande">
+        Escríbenos por WhatsApp para consultar productos, precios y disponibilidad. Te respondemos
+        en nuestro horario de atención.
+      </p>
+
+      <dl class="datos">
+        <div class="dato">
+          <dt><app-icon nombre="chat" /> WhatsApp</dt>
+          <dd>
+            <a class="enlace" [href]="whatsapp" target="_blank" rel="noopener">{{
+              negocio.telefono.visible
+            }}</a>
+          </dd>
+        </div>
+        <div class="dato">
+          <dt><app-icon nombre="telefono" /> Teléfono</dt>
+          <dd>
+            <a class="enlace" [href]="'tel:' + negocio.telefono.enlace">{{
+              negocio.telefono.visible
+            }}</a>
+          </dd>
+        </div>
+        <div class="dato">
+          <dt><app-icon nombre="reloj" /> Horario</dt>
+          @for (h of negocio.horario; track h.dias) {
+            <dd>{{ h.dias }}, {{ h.horas }}</dd>
+          }
+        </div>
+        @if (negocio.direccion; as dir) {
+          <div class="dato">
+            <dt><app-icon nombre="ubicacion" /> Dirección</dt>
+            <dd>
+              @if (dir.mapaUrl) {
+                <a class="enlace" [href]="dir.mapaUrl" target="_blank" rel="noopener">{{
+                  dir.texto
+                }}</a>
+              } @else {
+                {{ dir.texto }}
+              }
+            </dd>
+          </div>
+        }
+        @if (negocio.instagram; as ig) {
+          <div class="dato">
+            <dt><app-icon nombre="instagram" /> Instagram</dt>
+            <dd>
+              <a class="enlace" [href]="ig.url" target="_blank" rel="noopener">{{
+                '@' + ig.usuario
+              }}</a>
+            </dd>
+          </div>
+        }
+      </dl>
+
+      <div class="acciones">
+        <a class="btn btn--rojo" [href]="whatsapp" target="_blank" rel="noopener">
+          <app-icon nombre="chat" /> Consultar por WhatsApp
+        </a>
+        @if (enlaceCatalogo()) {
+          <a class="btn btn--contorno" routerLink="/catalogo">Ver catálogo</a>
+        }
+      </div>
+      <p class="nota">
+        Al tocar el botón se abre WhatsApp con un mensaje listo; tú decides si lo envías.
+      </p>
+    </div>
+  </div>
+</section>

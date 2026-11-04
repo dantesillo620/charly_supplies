@@ -1,0 +1,250 @@
+.header {
+  position: sticky;
+  top: 0;
+  z-index: 50;
+  /* Negro sólido: coincide con el fondo de LOGO OFICIAL */
+  background: var(--negro);
+  border-bottom: 1px solid transparent;
+  transition: border-color 200ms ease;
+}
+
+.header--desplazado {
+  border-bottom-color: var(--linea);
+}
+
+.barra {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  height: var(--alto-header);
+  background: var(--negro);
+}
+
+.brand {
+  display: block;
+  width: 5.25rem; /* ≈ 58px de alto */
+  flex: none;
+  border-radius: var(--radio-sm);
+
+  @media (min-width: 900px) {
+    width: 6.75rem; /* ≈ 74px de alto */
+  }
+}
+
+.nav {
+  display: none;
+  margin-inline: auto;
+
+  @media (min-width: 900px) {
+    display: block;
+  }
+
+  ul {
+    display: flex;
+    gap: clamp(1.25rem, 3vw, 2.75rem);
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  a {
+    position: relative;
+    display: inline-block;
+    padding-block: 0.75rem;
+    font-size: 0.875rem;
+    font-weight: 600;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    text-decoration: none;
+    color: var(--gris-calido);
+    transition: color 180ms ease;
+
+    &::after {
+      content: '';
+      position: absolute;
+      left: 0;
+      right: 0;
+      bottom: 0.35rem;
+      height: 2px;
+      background: var(--rojo);
+      transform: scaleX(0);
+      transform-origin: left;
+      transition: transform 240ms var(--ease-out);
+    }
+
+    &.activo {
+      color: var(--marfil);
+    }
+    &.activo::after {
+      transform: scaleX(1);
+    }
+
+    @media (hover: hover) and (pointer: fine) {
+      &:hover {
+        color: var(--marfil);
+      }
+    }
+  }
+}
+
+.acciones {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-left: auto;
+
+  @media (min-width: 900px) {
+    margin-left: 0;
+  }
+}
+
+/* En móvil pequeño el botón muestra solo el icono (el texto queda para lectores de pantalla) */
+.cta {
+  min-width: 2.75rem;
+  padding-inline: 0.75rem;
+
+  @media (min-width: 640px) {
+    padding-inline: 1.1rem;
+  }
+}
+
+.cta__texto {
+  @media (max-width: 639.98px) {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+    clip-path: inset(50%);
+    white-space: nowrap;
+  }
+}
+
+.toggle {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  min-height: 2.75rem;
+  padding: 0.5rem 0.9rem;
+  border: 1px solid var(--linea);
+  border-radius: 999px;
+  background: transparent;
+  font-size: 0.8125rem;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  transition:
+    border-color 180ms ease,
+    transform 160ms var(--ease-out);
+
+  &:active {
+    transform: scale(0.97);
+  }
+
+  &[aria-expanded='true'] {
+    border-color: var(--marfil);
+  }
+
+  @media (min-width: 900px) {
+    display: none;
+  }
+}
+
+/* ——— Menú móvil ——— */
+.menu {
+  position: absolute;
+  inset: 100% 0 auto;
+  z-index: 1;
+  background: var(--negro);
+  border-bottom: 1px solid var(--linea);
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(-0.75rem);
+  transition:
+    opacity 180ms ease,
+    transform 220ms var(--ease-out),
+    visibility 0s linear 220ms;
+
+  @media (min-width: 900px) {
+    display: none;
+  }
+}
+
+.menu--abierto {
+  opacity: 1;
+  visibility: visible;
+  transform: none;
+  transition:
+    opacity 200ms ease,
+    transform 260ms var(--ease-out),
+    visibility 0s;
+}
+
+.menu__interior {
+  display: grid;
+  gap: 1.5rem;
+  padding-block: 1rem 2rem;
+}
+
+.menu__lista {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+
+  li + li {
+    border-top: 1px solid var(--linea);
+  }
+
+  a {
+    display: flex;
+    align-items: baseline;
+    gap: 1rem;
+    padding-block: 0.85rem;
+    font-family: var(--font-display);
+    font-size: clamp(2.25rem, 11vw, 3.25rem);
+    line-height: 1;
+    text-transform: uppercase;
+    text-decoration: none;
+
+    &.activo {
+      color: var(--rojo-claro);
+    }
+  }
+}
+
+.menu__num {
+  font-family: var(--font-text);
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  color: var(--gris-calido);
+}
+
+.menu__cta {
+  justify-self: start;
+}
+
+.menu__horario {
+  font-size: 0.875rem;
+  color: var(--gris-calido);
+}
+
+.velo {
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  background: rgb(0 0 0 / 0.6);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 200ms ease;
+
+  @media (min-width: 900px) {
+    display: none;
+  }
+}
+
+.velo--visible {
+  opacity: 1;
+  pointer-events: auto;
+}

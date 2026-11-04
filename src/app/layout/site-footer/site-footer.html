@@ -1,0 +1,52 @@
+<footer class="footer superficie-oscura">
+  <div class="contenedor footer__rejilla">
+    <div class="footer__marca">
+      <app-brand-logo
+        class="footer__logo"
+        variante="blancoNegro"
+        sizes="(min-width: 900px) 260px, 220px"
+      />
+      <p class="footer__lema">Encendedores, pipas y accesorios. Consultas por WhatsApp.</p>
+    </div>
+
+    <nav class="footer__col" aria-label="Pie de página">
+      <h2 class="footer__titulo">Navegación</h2>
+      <ul>
+        @for (item of nav; track item.ruta) {
+          <li>
+            <a class="enlace-pie" [routerLink]="item.ruta">{{ item.etiqueta }}</a>
+          </li>
+        }
+      </ul>
+    </nav>
+
+    <div class="footer__col">
+      <h2 class="footer__titulo">Contacto</h2>
+      <ul>
+        <li>
+          <a class="enlace-pie" [href]="whatsapp" target="_blank" rel="noopener">
+            <app-icon nombre="chat" /> WhatsApp {{ negocio.telefono.visible }}
+          </a>
+        </li>
+        @for (h of negocio.horario; track h.dias) {
+          <li class="footer__dato"><app-icon nombre="reloj" /> {{ h.dias }}, {{ h.horas }}</li>
+        }
+        @if (negocio.direccion; as dir) {
+          <li class="footer__dato"><app-icon nombre="ubicacion" /> {{ dir.texto }}</li>
+        }
+        @if (negocio.instagram; as ig) {
+          <li>
+            <a class="enlace-pie" [href]="ig.url" target="_blank" rel="noopener">
+              <app-icon nombre="instagram" /> {{ '@' + ig.usuario }}
+            </a>
+          </li>
+        }
+      </ul>
+    </div>
+  </div>
+
+  <div class="contenedor footer__base">
+    <p>© {{ anio }} {{ negocio.nombre }}</p>
+    <p>Precios y disponibilidad se confirman por WhatsApp.</p>
+  </div>
+</footer>

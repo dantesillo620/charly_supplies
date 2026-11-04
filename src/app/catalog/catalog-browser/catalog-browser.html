@@ -1,0 +1,84 @@
+@if (catalogoVacio) {
+  <div class="vacio">
+    <p class="vacio__titulo">Muy pronto publicaremos el catálogo</p>
+    <p class="vacio__texto">Mientras tanto, pregúntanos por los accesorios disponibles.</p>
+    <a class="btn btn--rojo" [href]="whatsapp" target="_blank" rel="noopener">
+      <app-icon nombre="chat" /> Consultar por WhatsApp
+    </a>
+  </div>
+} @else {
+  <div class="herramientas" role="search">
+    <div class="buscador">
+      <label class="buscador__etiqueta" for="buscar-producto">Buscar por nombre</label>
+      <div class="buscador__campo">
+        <app-icon nombre="buscar" />
+        <input
+          #campo
+          id="buscar-producto"
+          type="search"
+          autocomplete="off"
+          enterkeyhint="search"
+          placeholder="Ej. encendedor"
+          [value]="busqueda()"
+          (input)="alBuscar($event)"
+        />
+      </div>
+    </div>
+
+    <div class="filtros" role="group" aria-label="Filtrar por categoría">
+      <button
+        type="button"
+        class="filtro"
+        [attr.aria-pressed]="categoria() === null"
+        (click)="elegirCategoria(null)"
+      >
+        Todos
+      </button>
+      @for (c of categorias; track c.id) {
+        <button
+          type="button"
+          class="filtro"
+          [attr.aria-pressed]="categoria() === c.id"
+          (click)="elegirCategoria(c.id)"
+        >
+          {{ c.nombre }} <span class="filtro__n">{{ conteo().get(c.id) ?? 0 }}</span>
+        </button>
+      }
+    </div>
+  </div>
+
+  <div class="estado">
+    <p class="estado__conteo" role="status">{{ resumen() }}</p>
+    @if (hayEjemplos) {
+      <p class="estado__aviso">
+        <span class="etiqueta-ejemplo">Demostración</span>
+        Las fichas actuales son de ejemplo; las fotos y productos reales se publicarán pronto.
+      </p>
+    }
+  </div>
+
+  @if (resultados().length) {
+    <app-product-grid [productos]="resultados()" />
+  } @else {
+    <div class="vacio">
+      <p class="vacio__titulo">
+        @if (busqueda()) {
+          No encontramos “{{ busqueda() }}”
+        } @else {
+          Aún no hay productos en esta categoría
+        }
+      </p>
+      <p class="vacio__texto">
+        Prueba con otro nombre o categoría. Si buscas algo en particular, escríbenos.
+      </p>
+      <div class="vacio__acciones">
+        <button type="button" class="btn btn--contorno" (click)="limpiar(campo)">
+          Ver todo el catálogo
+        </button>
+        <a class="btn btn--rojo" [href]="whatsapp" target="_blank" rel="noopener">
+          <app-icon nombre="chat" /> Preguntar por WhatsApp
+        </a>
+      </div>
+    </div>
+  }
+}

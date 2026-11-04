@@ -1,21 +1,9 @@
-<header class="site-header">
-  <a class="brand" routerLink="/">{{ siteName }}</a>
-  <nav aria-label="Principal">
-    @for (item of nav; track item.path) {
-      <a
-        [routerLink]="item.path"
-        routerLinkActive="active"
-        [routerLinkActiveOptions]="{ exact: item.exact }"
-        >{{ item.label }}</a
-      >
-    }
-  </nav>
-</header>
+<a class="saltar" href="#contenido" (click)="saltarAlContenido($event)">Saltar al contenido</a>
 
-<main>
+<app-site-header />
+
+<main id="contenido" tabindex="-1">
   <router-outlet />
 </main>
 
-<footer class="site-footer">
-  <p>© {{ year }} {{ siteName }}</p>
-</footer>
+<app-site-footer />

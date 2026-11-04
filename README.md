@@ -15,10 +15,30 @@ se genera como HTML estático con su SEO ya incluido.
 | `npm run build` | Genera el sitio en `dist/charly-supplies/browser` |
 | `npx ng test` | Ejecuta las pruebas |
 
+## Editar contenido
+
+| Qué | Dónde |
+|---|---|
+| Teléfono, WhatsApp, horario, dirección, Instagram | `src/app/core/business.config.ts` |
+| Mensajes de WhatsApp | `src/app/core/whatsapp.ts` |
+| Productos, categorías y **modo demostración** | `src/app/catalog/catalog.data.ts` |
+| Logos (variantes y tamaños) | `src/app/core/brand.ts` · archivos en `public/brand/web/` |
+
+- **Dirección / Instagram:** están en `null` y no se muestran. Reemplázalos por el objeto de
+  ejemplo comentado en `business.config.ts` y aparecerán en contacto, pie de página y JSON-LD.
+- **Productos reales:** guarda las fotos en `public/images/productos/` (WebP o JPG, de
+  preferencia cuadradas o 4:5, ~1200 px) y agrega cada producto a `PRODUCTOS` con la plantilla
+  comentada. La primera imagen es la portada; con dos o más se activa la galería del detalle.
+  Sin `precio` se muestra «Consultar precio».
+- **Quitar las fichas de ejemplo:** `MODO_DEMOSTRACION = false` en `catalog.data.ts`.
+- **Fotos del local:** `public/images/tienda/` (reservada para uso futuro).
+- Los logos originales de `public/brand/*.png` no se publican (ver `ignore` en `angular.json`);
+  el sitio usa las copias optimizadas de `public/brand/web/`.
+
 ## SEO
 
-- **Datos del sitio y del negocio:** `src/app/core/site.config.ts` (dominio, teléfono,
-  dirección, horarios, redes sociales, tipo de negocio para schema.org).
+- **Datos del sitio:** `src/app/core/site.config.ts` (dominio, descripción, imagen para redes,
+  tipo de negocio para schema.org). Los datos de contacto vienen de `business.config.ts`.
 - **Título y descripción por página:** propiedades `title` y `data.seo` en `src/app/app.routes.ts`.
 - `SeoTitleStrategy` aplica en cada ruta el título, la descripción, el canonical, Open Graph y
   Twitter Card. La página de inicio también agrega el JSON-LD `Store`.

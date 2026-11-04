@@ -13,17 +13,18 @@ export const routes: Routes = [
     data: {
       seo: {
         description:
-          'Charly Supplies: productos e insumos de calidad. Conoce nuestro catálogo y haz tu pedido.',
+          'Charly Supplies: encendedores, pipas y accesorios con estilo urbano. Explora el catálogo y consulta precio y disponibilidad por WhatsApp.',
       } satisfies SeoData,
     },
   },
   {
-    path: 'productos',
-    title: 'Productos',
-    loadComponent: () => import('./pages/productos/productos'),
+    path: 'catalogo',
+    title: 'Catálogo',
+    loadComponent: () => import('./pages/catalogo/catalogo'),
     data: {
       seo: {
-        description: 'Catálogo de productos de Charly Supplies.',
+        description:
+          'Catálogo de Charly Supplies: encendedores, pipas y otros accesorios. Busca por nombre, filtra por categoría y consulta por WhatsApp.',
       } satisfies SeoData,
     },
   },
@@ -33,7 +34,8 @@ export const routes: Routes = [
     loadComponent: () => import('./pages/contacto/contacto'),
     data: {
       seo: {
-        description: 'Contacta a Charly Supplies para cotizaciones y pedidos.',
+        description:
+          'Contacta a Charly Supplies por WhatsApp para consultar productos, precios y disponibilidad. Horario de atención de lunes a viernes.',
       } satisfies SeoData,
     },
   },

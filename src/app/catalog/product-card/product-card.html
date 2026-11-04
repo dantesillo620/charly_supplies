@@ -1,0 +1,39 @@
+@let p = producto();
+<article class="tarjeta" [attr.aria-labelledby]="'prod-' + p.id">
+  <div class="tarjeta__media">
+    <app-product-media [imagen]="p.imagenes[0]" [categoria]="p.categoria" />
+    @if (p.esEjemplo) {
+      <span class="etiqueta-ejemplo tarjeta__etiqueta">Producto de ejemplo</span>
+    }
+  </div>
+
+  <div class="tarjeta__cuerpo">
+    <p class="tarjeta__categoria">{{ categoria() }}</p>
+    <h3 class="tarjeta__nombre" [id]="'prod-' + p.id">
+      <!-- El botón cubre toda la tarjeta (ver ::after) para abrir el detalle -->
+      <button #abrir type="button" class="tarjeta__abrir" (click)="verDetalle.emit(abrir)">
+        {{ p.nombre }}<span class="sr-only">, ver detalle</span>
+      </button>
+    </h3>
+    <p class="tarjeta__precio">{{ precio() }}</p>
+
+    <div class="tarjeta__acciones">
+      @if (p.esEjemplo) {
+        <span class="tarjeta__nota">Consulta no disponible en fichas de ejemplo</span>
+      } @else {
+        <a
+          class="btn btn--rojo btn--sm tarjeta__consultar"
+          [href]="whatsapp()"
+          target="_blank"
+          rel="noopener"
+          [attr.aria-label]="'Consultar ' + p.nombre + ' por WhatsApp'"
+        >
+          <app-icon nombre="chat" /> Consultar
+        </a>
+      }
+      <span class="tarjeta__ver" aria-hidden="true">
+        Ver detalle <app-icon nombre="flecha" />
+      </span>
+    </div>
+  </div>
+</article>

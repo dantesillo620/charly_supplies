@@ -1,0 +1,27 @@
+<section class="seccion superficie-clara" aria-labelledby="categorias-titulo">
+  <div class="contenedor">
+    <header class="cabecera" appReveal>
+      <p class="antetitulo antetitulo--rojo">Categorías</p>
+      <h2 id="categorias-titulo" class="titulo-seccion">Elige por<br />categoría</h2>
+      <p class="texto-grande">
+        Encuentra rápido lo que buscas. Cada categoría te lleva al catálogo ya filtrado.
+      </p>
+    </header>
+
+    <ol class="lista">
+      @for (c of categorias; track c.id; let i = $index) {
+        <li appReveal>
+          <a class="fila" routerLink="/catalogo" [queryParams]="{ categoria: c.id }">
+            <span class="fila__num" aria-hidden="true">0{{ i + 1 }}</span>
+            <app-icon class="fila__icono" [nombre]="c.id" />
+            <span class="fila__texto">
+              <span class="fila__nombre">{{ c.nombre }}</span>
+              <span class="fila__resumen">{{ c.resumen }}</span>
+            </span>
+            <span class="fila__flecha" aria-hidden="true"><app-icon nombre="flecha" /></span>
+          </a>
+        </li>
+      }
+    </ol>
+  </div>
+</section>
